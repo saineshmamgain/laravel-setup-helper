@@ -14,5 +14,12 @@
         "psr-4": {
             "SaineshMamgain\\SetupHelper\\" : "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SaineshMamgain\\SetupHelper\\SetupHelperServiceProvider"
+            ]
+        }
     }
 }

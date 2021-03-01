@@ -3,6 +3,7 @@
 namespace SaineshMamgain\SetupHelper\Console\Commands\Generators;
 
 use Illuminate\Console\GeneratorCommand;
+use SaineshMamgain\SetupHelper\Exceptions\FileNotFoundException;
 
 /**
  * File: TraitMakeCommand.php
@@ -40,10 +41,14 @@ class TraitMakeCommand extends GeneratorCommand
      * Get the stub file for the generator.
      *
      * @return string
+     * @throws FileNotFoundException
      */
     protected function getStub()
     {
-       return $this->laravel->basePath(trim('/stubs/trait.stub', '/'));
+        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/trait.stub', '/'))))
+            return $stubsPath;
+
+        throw new FileNotFoundException("Stub for trait not found");
     }
 
 

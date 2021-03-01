@@ -3,6 +3,7 @@
 namespace SaineshMamgain\SetupHelper\Console\Commands\Generators;
 
 use Illuminate\Console\GeneratorCommand;
+use SaineshMamgain\SetupHelper\Exceptions\FileNotFoundException;
 
 /**
  * File: ContractMakeCommand.php
@@ -39,10 +40,14 @@ class ContractMakeCommand extends GeneratorCommand
      * Get the stub file for the generator.
      *
      * @return string
+     * @throws FileNotFoundException
      */
     protected function getStub()
     {
-        return $this->laravel->basePath(trim('/stubs/contract.stub', '/'));
+        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/contract.stub', '/'))))
+            return $stubsPath;
+
+        throw new FileNotFoundException("Stub for contract not found");
     }
 
     protected function getDefaultNamespace($rootNamespace)
