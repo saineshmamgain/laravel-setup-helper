@@ -45,7 +45,7 @@ class TraitMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/trait.stub', '/'))))
+        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/setup-helper-trait.stub', '/'))))
             return $stubsPath;
 
         throw new FileNotFoundException("Stub for trait not found");

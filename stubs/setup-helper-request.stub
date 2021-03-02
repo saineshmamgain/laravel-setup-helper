@@ -1,0 +1,68 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Http\Requests\BaseRequest;
+
+class DummyClass extends BaseRequest
+{
+    /**
+     * Rules to apply on get request
+     *
+     * @return array
+     */
+    public function getMethodRules() : array
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Rules to apply on post request
+     *
+     * @return array
+     */
+    public function postMethodRules() : array
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Rules to apply on put request
+     *
+     * @return array
+     */
+    public function putMethodRules() : array
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Rules to apply on patch request
+     *
+     * @return array
+     */
+    public function patchMethodRules() : array
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Rules to apply on delete request
+     *
+     * @return array
+     */
+    public function deleteMethodRules() : array
+    {
+        return [
+            //
+        ];
+    }
+}

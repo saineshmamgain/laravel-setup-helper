@@ -44,7 +44,7 @@ class ContractMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/contract.stub', '/'))))
+        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/setup-helper-contract.stub', '/'))))
             return $stubsPath;
 
         throw new FileNotFoundException("Stub for contract not found");

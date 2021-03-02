@@ -40,9 +40,15 @@ class SetupCommand extends Command {
             (new Filesystem)->makeDirectory($stubsPath);
         }
 
+        if (! is_dir($requestsPath = $this->laravel->basePath('app/Http/Requests'))){
+            (new Filesystem)->makeDirectory($requestsPath);
+        }
+
         $files = [
-            realpath(__DIR__ . '/../../../stubs/trait.stub') => $stubsPath . '/trait.stub',
-            realpath(__DIR__ . '/../../../stubs/contract.stub') => $stubsPath . '/contract.stub',
+            realpath(__DIR__ . '/../../../stubs/setup-helper-trait.stub') => $stubsPath . '/setup-helper-trait.stub',
+            realpath(__DIR__ . '/../../../stubs/setup-helper-contract.stub') => $stubsPath . '/setup-helper-contract.stub',
+            realpath(__DIR__ . '/../../../stubs/setup-helper-request.stub') => $stubsPath . '/setup-helper-request.stub',
+            realpath(__DIR__ . '/../../Http/Requests/BaseRequest.php.stub') => $requestsPath . '/BaseRequest.php',
         ];
 
         foreach ($files as $from => $to) {
