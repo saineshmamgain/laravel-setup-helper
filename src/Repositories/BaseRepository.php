@@ -63,7 +63,7 @@ abstract class BaseRepository
      * @return Model
      * @throws RepositoryException
      */
-    public function update(array $fields)
+    public function update($fields)
     {
         if (!$this->model->exists) {
             throw new RepositoryException('Instance should not be fresh for update');
@@ -75,7 +75,7 @@ abstract class BaseRepository
      * @param array $fields
      * @return Model
      */
-    protected function save(array $fields)
+    protected function save($fields)
     {
         $original_fields = $fields;
         $fields = $this->beforeSave($fields);
@@ -123,7 +123,7 @@ abstract class BaseRepository
      * @param bool $persist
      * @return $this
      */
-    public function persist(bool $persist)
+    public function persist($persist)
     {
         $this->persist = $persist;
         return $this;
@@ -133,7 +133,7 @@ abstract class BaseRepository
      * @param bool $refresh
      * @return $this
      */
-    public function refresh(bool $refresh)
+    public function refresh($refresh)
     {
         $this->refresh = $refresh;
         return $this;
@@ -162,7 +162,7 @@ abstract class BaseRepository
      * @return Model
      * @throws RepositoryException
      */
-    public function create(array $fields)
+    public function create($fields)
     {
         if ($this->model->exists) {
             throw new RepositoryException('Fresh instance required for creation');
@@ -174,7 +174,7 @@ abstract class BaseRepository
      * @param array $fields
      * @return array
      */
-    protected function beforeSave(array $fields) : array
+    protected function beforeSave($fields)
     {
         return $fields;
     }
@@ -185,7 +185,7 @@ abstract class BaseRepository
      * @param array $fields
      * @return Model
      */
-    protected function afterSave(array $original_fields, array $fields)
+    protected function afterSave($original_fields, $fields)
     {
         return $this->model;
     }
@@ -195,7 +195,7 @@ abstract class BaseRepository
      * @param bool $permanent
      * @return Model
      */
-    protected function beforeDestroy(bool $isSoftDeletable, bool $permanent)
+    protected function beforeDestroy($isSoftDeletable, $permanent)
     {
         return $this->model;
     }
