@@ -1,0 +1,33 @@
+<?php
+namespace {{ namespace }};
+
+use App\Exceptions\RepositoryException;
+use App\Repositories\BaseRepository;
+use {{DummyModelNamespace}};
+
+/**
+ * @method create(array $fields) : {{DummyModel}}
+ * @method update(array $fields) : {{DummyModel}}
+ * @method createMany($rows) : ...{{DummyModel}}
+ */
+
+class {{ class }} extends BaseRepository
+{
+    /**
+     * {{DummyModelNamespace}}
+     *
+     * @var {{DummyModel}}
+     */
+    protected $model;
+
+    public function __construct({{DummyModel}} $model = null)
+    {
+        if (empty($model)){
+            $model = new {{DummyModel}}();
+        }elseif (!$model instanceof {{DummyModel}}){
+            throw new RepositoryException(get_class($model) . ' is not an instance of {{DummyModel}} model');
+        }
+
+        parent::__construct($model);
+    }
+}

@@ -1,0 +1,9 @@
+<?php
+
+namespace App\Http\Requests;
+
+abstract class BaseRequest extends \SaineshMamgain\SetupHelper\Http\Requests\BaseRequest
+{
+
+
+}

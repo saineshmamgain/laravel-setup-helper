@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Requests;
+namespace SaineshMamgain\SetupHelper\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
