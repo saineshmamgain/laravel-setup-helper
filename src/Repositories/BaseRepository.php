@@ -53,7 +53,7 @@ abstract class BaseRepository
      * @return static
      * @throws RepositoryException
      */
-    public static function make($model = null)
+    public static function init($model = null)
     {
         return new static($model);
     }
