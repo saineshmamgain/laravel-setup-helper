@@ -10,9 +10,8 @@ use SaineshMamgain\SetupHelper\Exceptions\FileNotFoundException;
  * Author: Sainesh Mamgain
  * Email: saineshmamgain@gmail.com
  * Date: 01/03/21
- * Time: 6:28 PM
+ * Time: 6:28 PM.
  */
-
 class ContractMakeCommand extends GeneratorCommand
 {
     /**
@@ -39,19 +38,21 @@ class ContractMakeCommand extends GeneratorCommand
     /**
      * Get the stub file for the generator.
      *
-     * @return string
      * @throws FileNotFoundException
+     *
+     * @return string
      */
     protected function getStub()
     {
-        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/setup-helper-contract.stub', '/'))))
+        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/setup-helper-contract.stub', '/')))) {
             return $stubsPath;
+        }
 
-        throw new FileNotFoundException("Stub for contract not found");
+        throw new FileNotFoundException('Stub for contract not found');
     }
 
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Contracts';
+        return $rootNamespace.'\Contracts';
     }
 }

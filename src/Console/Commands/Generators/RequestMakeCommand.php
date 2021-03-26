@@ -6,9 +6,10 @@ class RequestMakeCommand extends \Illuminate\Foundation\Console\RequestMakeComma
 {
     protected function getStub()
     {
-        if (file_exists($this->laravel->basePath('/stubs/setup-helper-request.stub'))){
+        if (file_exists($this->laravel->basePath('/stubs/setup-helper-request.stub'))) {
             return $this->resolveStubPath('/stubs/setup-helper-request.stub');
         }
+
         return parent::getStub();
     }
 }

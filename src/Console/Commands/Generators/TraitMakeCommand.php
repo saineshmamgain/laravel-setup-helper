@@ -10,12 +10,10 @@ use SaineshMamgain\SetupHelper\Exceptions\FileNotFoundException;
  * Author: Sainesh Mamgain
  * Email: saineshmamgain@gmail.com
  * Date: 01/03/21
- * Time: 6:22 PM
+ * Time: 6:22 PM.
  */
-
 class TraitMakeCommand extends GeneratorCommand
 {
-
     /**
      * The name and signature of the console command.
      *
@@ -40,26 +38,28 @@ class TraitMakeCommand extends GeneratorCommand
     /**
      * Get the stub file for the generator.
      *
-     * @return string
      * @throws FileNotFoundException
+     *
+     * @return string
      */
     protected function getStub()
     {
-        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/setup-helper-trait.stub', '/'))))
+        if (file_exists($stubsPath = $this->laravel->basePath(trim('/stubs/setup-helper-trait.stub', '/')))) {
             return $stubsPath;
+        }
 
-        throw new FileNotFoundException("Stub for trait not found");
+        throw new FileNotFoundException('Stub for trait not found');
     }
-
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param string $rootNamespace
+     *
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Traits';
+        return $rootNamespace.'\Traits';
     }
 }

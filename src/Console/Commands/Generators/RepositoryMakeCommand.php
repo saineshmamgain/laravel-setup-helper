@@ -12,9 +12,8 @@ use Symfony\Component\Console\Input\InputOption;
  * Author: Sainesh Mamgain
  * Email: saineshmamgain@gmail.com
  * Date: 03/03/21
- * Time: 10:35 AM
+ * Time: 10:35 AM.
  */
-
 class RepositoryMakeCommand extends GeneratorCommand
 {
     /**
@@ -65,8 +64,9 @@ class RepositoryMakeCommand extends GeneratorCommand
 
         $path = $this->getPath($this->repositoryClass);
 
-        if($this->alreadyExists($this->repositoryClass)){
+        if ($this->alreadyExists($this->repositoryClass)) {
             $this->error($this->type.' already exists!');
+
             return false;
         }
 
@@ -91,13 +91,13 @@ class RepositoryMakeCommand extends GeneratorCommand
 
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Repositories';
+        return $rootNamespace.'\Repositories';
     }
 
     protected function getOptions()
     {
         return [
-            ['model', InputOption::VALUE_REQUIRED, 'The name of Model Class']
+            ['model', InputOption::VALUE_REQUIRED, 'The name of Model Class'],
         ];
     }
 
@@ -109,18 +109,18 @@ class RepositoryMakeCommand extends GeneratorCommand
 
         $fullyQualifiedModelNameSpace = '';
 
-        if (file_exists(base_path('app/Models/'.$name.'.php'))){
-            $fullyQualifiedModelNameSpace = "App\\Models\\".$name;
+        if (file_exists(base_path('app/Models/'.$name.'.php'))) {
+            $fullyQualifiedModelNameSpace = 'App\\Models\\'.$name;
         }
-        if (file_exists(base_path('app/'.$name.'.php'))){
-            $fullyQualifiedModelNameSpace = "App\\".$name;
+        if (file_exists(base_path('app/'.$name.'.php'))) {
+            $fullyQualifiedModelNameSpace = 'App\\'.$name;
         }
 
-        if (!(new $fullyQualifiedModelNameSpace instanceof Model)){
+        if (!(new $fullyQualifiedModelNameSpace() instanceof Model)) {
             throw new \Exception($name.' is not a valid model');
         }
 
-        if (empty($fullyQualifiedModelNameSpace)){
+        if (empty($fullyQualifiedModelNameSpace)) {
             throw new \Exception('Model '.$name.' doesn\'t exist');
         }
 
@@ -129,7 +129,7 @@ class RepositoryMakeCommand extends GeneratorCommand
 
         $modelClass = $modelClass = $this->qualifyClass($name);
 
-        $this->repositoryClass = $modelClass . 'Repository';
+        $this->repositoryClass = $modelClass.'Repository';
 
         return $this;
     }
@@ -137,14 +137,15 @@ class RepositoryMakeCommand extends GeneratorCommand
     /**
      * Replace the class name for the given stub.
      *
-     * @param  string  $stub
-     * @param  string  $name
+     * @param string $stub
+     * @param string $name
+     *
      * @return string
      */
     protected function replaceClass($stub, $name)
     {
-        if(!$this->argument('name')){
-            throw new InvalidArgumentException("Missing required argument model name");
+        if (!$this->argument('name')) {
+            throw new InvalidArgumentException('Missing required argument model name');
         }
 
         $stub = parent::replaceClass($stub, $name);
