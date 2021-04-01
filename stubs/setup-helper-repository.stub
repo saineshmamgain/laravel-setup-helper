@@ -1,5 +1,5 @@
 <?php
-namespace {{ namespace }};
+namespace DummyNamespace;
 
 use App\Exceptions\RepositoryException;
 use App\Repositories\BaseRepository;
@@ -11,7 +11,7 @@ use {{DummyModelNamespace}};
  * @method createMany($rows) : ...{{DummyModel}}
  */
 
-class {{ class }} extends BaseRepository
+class DummyClass extends BaseRepository
 {
     /**
      * {{DummyModelNamespace}}
@@ -27,7 +27,6 @@ class {{ class }} extends BaseRepository
         }elseif (!$model instanceof {{DummyModel}}){
             throw new RepositoryException(get_class($model) . ' is not an instance of {{DummyModel}} model');
         }
-
         parent::__construct($model);
     }
 }

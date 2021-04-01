@@ -1,10 +1,10 @@
 <?php
 
-namespace {{ namespace }};
+namespace DummyNamespace;
 
 use App\Jobs\BaseJob;
 
-class {{ class }} extends BaseJob
+class DummyClass extends BaseJob
 {
 
     /**

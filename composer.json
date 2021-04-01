@@ -8,7 +8,9 @@
             "email": "saineshmamgain@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "laravel/framework": ">=v6.0.0"
+    },
     "description": "A package to setup basic functionality to a new laravel installation",
     "autoload": {
         "psr-4": {
