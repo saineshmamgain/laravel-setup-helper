@@ -1,15 +1,16 @@
 <?php
+
 namespace SaineshMamgain\SetupHelper\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * File: BaseRequest.php
  * Date: 13/07/20
- * Author: Sainesh Mamgain <saineshmamgain@gmail.com>
+ * Author: Sainesh Mamgain <saineshmamgain@gmail.com>.
  */
-
-abstract class BaseRequest extends FormRequest {
-
+abstract class BaseRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,15 +29,15 @@ abstract class BaseRequest extends FormRequest {
     public function rules()
     {
         switch (strtolower($this->method())) {
-            case "post":
+            case 'post':
                 return $this->postMethodRules();
-            case "put":
+            case 'put':
                 return $this->putMethodRules();
-            case "patch":
+            case 'patch':
                 return $this->patchMethodRules();
-            case "get":
+            case 'get':
                 return $this->getMethodRules();
-            case "delete":
+            case 'delete':
                 return $this->deleteMethodRules();
         }
     }

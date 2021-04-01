@@ -5,7 +5,7 @@
  * Author: Sainesh Mamgain
  * Email: saineshmamgain@gmail.com
  * Date: 02/03/21
- * Time: 3:06 PM
+ * Time: 3:06 PM.
  */
 
 return [

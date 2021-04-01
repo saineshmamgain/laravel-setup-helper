@@ -2,33 +2,32 @@
 
 namespace SaineshMamgain\SetupHelper\Repositories;
 
-use SaineshMamgain\SetupHelper\Exceptions\RepositoryException;
 use Illuminate\Database\Eloquent\Model;
+use SaineshMamgain\SetupHelper\Exceptions\RepositoryException;
 
 /**
  * File: Repository.php
  * Date: 06/07/20
- * Author: Sainesh Mamgain <saineshmamgain@gmail.com>
+ * Author: Sainesh Mamgain <saineshmamgain@gmail.com>.
  */
 abstract class BaseRepository
 {
-
     /**
-     * Model
+     * Model.
      *
      * @var Model
      */
     protected $model;
 
     /**
-     * Persist model in database
+     * Persist model in database.
      *
      * @var bool
      */
     protected $persist = true;
 
     /**
-     * Refresh model after insert or update
+     * Refresh model after insert or update.
      *
      * @var bool
      */
@@ -36,13 +35,15 @@ abstract class BaseRepository
 
     /**
      * Repository constructor.
+     *
      * @param $model
+     *
      * @throws RepositoryException
      */
     public function __construct($model)
     {
         if (!($model instanceof Model)) {
-            throw new RepositoryException('Given object is not an Instance of ' . Model::class);
+            throw new RepositoryException('Given object is not an Instance of '.Model::class);
         }
 
         $this->model = $model;
@@ -50,8 +51,10 @@ abstract class BaseRepository
 
     /**
      * @param $model
-     * @return static
+     *
      * @throws RepositoryException
+     *
+     * @return static
      */
     public static function init($model = null)
     {
@@ -60,19 +63,23 @@ abstract class BaseRepository
 
     /**
      * @param array $fields
-     * @return Model
+     *
      * @throws RepositoryException
+     *
+     * @return Model
      */
     public function update($fields)
     {
         if (!$this->model->exists) {
             throw new RepositoryException('Instance should not be fresh for update');
         }
+
         return $this->save($fields);
     }
 
     /**
      * @param array $fields
+     *
      * @return Model
      */
     protected function save($fields)
@@ -85,7 +92,7 @@ abstract class BaseRepository
         }
         if ($this->persist) {
             $this->model->save();
-            if ($this->refresh){
+            if ($this->refresh) {
                 $this->model->refresh();
             }
         }
@@ -95,8 +102,10 @@ abstract class BaseRepository
 
     /**
      * @param bool $permanent
-     * @return bool|null
+     *
      * @throws RepositoryException
+     *
+     * @return bool|null
      */
     public function destroy($permanent = false)
     {
@@ -106,12 +115,11 @@ abstract class BaseRepository
 
         $isSoftDeletable = method_exists($this->model, 'getDeletedAtColumn');
 
-
         $this->model = $this->beforeDestroy($isSoftDeletable, $permanent);
 
         // check if model is soft deletable
-        if ($isSoftDeletable){
-            if ($permanent){
+        if ($isSoftDeletable) {
+            if ($permanent) {
                 return $this->model->forceDelete();
             }
         }
@@ -121,32 +129,38 @@ abstract class BaseRepository
 
     /**
      * @param bool $persist
+     *
      * @return $this
      */
     public function persist($persist)
     {
         $this->persist = $persist;
+
         return $this;
     }
 
     /**
      * @param bool $refresh
+     *
      * @return $this
      */
     public function refresh($refresh)
     {
         $this->refresh = $refresh;
+
         return $this;
     }
 
     /**
      * @param array|callable $rows
-     * @return array
+     *
      * @throws RepositoryException
+     *
+     * @return array
      */
     public function createMany($rows)
     {
-        if (is_callable($rows)){
+        if (is_callable($rows)) {
             $rows = $rows();
         }
         $saved = [];
@@ -154,24 +168,29 @@ abstract class BaseRepository
             $saved[] = static::make()
                 ->create($fields);
         }
+
         return $saved;
     }
 
     /**
      * @param array $fields
-     * @return Model
+     *
      * @throws RepositoryException
+     *
+     * @return Model
      */
     public function create($fields)
     {
         if ($this->model->exists) {
             throw new RepositoryException('Fresh instance required for creation');
         }
+
         return $this->save($fields);
     }
 
     /**
      * @param array $fields
+     *
      * @return array
      */
     protected function beforeSave($fields)
@@ -179,10 +198,10 @@ abstract class BaseRepository
         return $fields;
     }
 
-
     /**
      * @param array $original_fields
      * @param array $fields
+     *
      * @return Model
      */
     protected function afterSave($original_fields, $fields)
@@ -193,6 +212,7 @@ abstract class BaseRepository
     /**
      * @param bool $isSoftDeletable
      * @param bool $permanent
+     *
      * @return Model
      */
     protected function beforeDestroy($isSoftDeletable, $permanent)
@@ -201,18 +221,19 @@ abstract class BaseRepository
     }
 
     /**
-     * @return Model
      * @throws RepositoryException
+     *
+     * @return Model
      */
     public function restore()
     {
         if (!$this->model->exists) {
             throw new RepositoryException('Instance should not be fresh for restoring');
         }
-        if (!method_exists($this->model, 'getDeletedAtColumn')){
+        if (!method_exists($this->model, 'getDeletedAtColumn')) {
             throw new RepositoryException('Model is not soft deletable');
         }
-        if (!array_key_exists($this->model->getDeletedAtColumn(), $this->model->attributesToArray())){
+        if (!array_key_exists($this->model->getDeletedAtColumn(), $this->model->attributesToArray())) {
             throw new RepositoryException('Deleted at column doesn\'t exists on this instance');
         }
         $this->model->restore();
