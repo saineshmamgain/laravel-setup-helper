@@ -7,18 +7,6 @@ use App\Http\Requests\BaseRequest;
 class DummyClass extends BaseRequest
 {
     /**
-     * Rules to apply on get request
-     *
-     * @return array
-     */
-    public function getMethodRules() : array
-    {
-        return [
-            //
-        ];
-    }
-
-    /**
      * Rules to apply on post request
      *
      * @return array

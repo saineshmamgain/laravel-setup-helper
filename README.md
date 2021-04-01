@@ -22,7 +22,7 @@ The config has following switches:
 
 Set to false if you don't want these functionalities.
 
-###Run
+### Run
 
 ``php artisan setup-helper:install``
 
@@ -57,8 +57,6 @@ To make this more smooth this package Provides `BaseRequest` class.
 When installation is complete, the request files created by `php artisan make:request` command will extend this `BaseRequest` class.
 
 `postMethodRules()` To apply rules only on `POST` requests
-
-`getMethodRules()` To apply rules only on `GET` requests
 
 `putMethodRules()` To apply rules only on `PUT` requests
 

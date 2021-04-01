@@ -35,8 +35,6 @@ abstract class BaseRequest extends FormRequest
                 return $this->putMethodRules();
             case 'patch':
                 return $this->patchMethodRules();
-            case 'get':
-                return $this->getMethodRules();
             case 'delete':
                 return $this->deleteMethodRules();
         }
