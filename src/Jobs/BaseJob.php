@@ -13,10 +13,12 @@ use Illuminate\Queue\SerializesModels;
  * Author: Sainesh Mamgain
  * Email: saineshmamgain@gmail.com
  * Date: 12/03/21
- * Time: 8:52 PM
+ * Time: 8:52 PM.
  */
-
-abstract class BaseJob implements ShouldQueue {
-
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+abstract class BaseJob implements ShouldQueue
+{
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 }
