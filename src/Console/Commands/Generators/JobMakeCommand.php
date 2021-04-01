@@ -23,7 +23,8 @@ class JobMakeCommand extends \Illuminate\Foundation\Console\JobMakeCommand
     /**
      * Resolve the fully-qualified path to the stub.
      *
-     * @param  string  $stub
+     * @param string $stub
+     *
      * @return string
      */
     protected function resolveStubPath($stub)
