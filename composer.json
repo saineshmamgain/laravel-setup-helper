@@ -12,7 +12,7 @@
     "description": "A package to setup basic functionality to a new laravel installation",
     "autoload": {
         "psr-4": {
-            "SaineshMamgain\\SetupHelper\\" : "src/"
+            "SetupHelper\\" : "src/"
         }
     },
     "extra": {

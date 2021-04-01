@@ -1,4 +1,4 @@
-# Laravel Setup Helper (WIP)
+# Laravel Setup Helper
 
 A package to add some extra goodies to your laravel applications.
 
@@ -6,15 +6,19 @@ A package to add some extra goodies to your laravel applications.
 
 ### Install
 
-``composer require saineshmamgain/laravel-setup-helper`` (work in progress)
+``composer require saineshmamgain/laravel-setup-helper``
 
 Publish the config
 
 ``php artisan vendor:publish --tag=setup-helper-config``
 
-The config has currently two switches:
+The config has following switches:
 
-`allow_request_make_command` and `allow_repository_make_command`
+`allow_request_make_command`
+
+`allow_repository_make_command`
+
+`allow_make_job_command`
 
 Set to false if you don't want these functionalities.
 
@@ -46,7 +50,7 @@ While writing Form Requests in Laravel, we have to create a class and define rul
 
 for example if you want to write validations for creating a user you will create a `UserRequest` class 
 
-now for editing the user either you will create an `EditUserRequest` class and define the rules there or you will use the `UserRequest` class and will write conditions for applying some rules only when it is an edit request.
+now for editing the user either you will create an `EditUserRequest` class and define the rules, or you will use the `UserRequest` class and will write conditions for applying some rules only when it is an edit request.
 
 To make this more smooth this package Provides `BaseRequest` class.
 
@@ -76,8 +80,54 @@ Repository ships with some common functions for example:
 
 ### Create
 
-```UserRepository::init()->create(["name" => "John Doe", "email" => "johndoe@example.com])```
+```
+UserRepository::init()
+    ->create([
+        "name" => "John Doe", 
+        "email" => "johndoe@example.com
+    ])
+```
 
-Since you will get a repository class you can define `beforeSave` and `afterSave` events in the class itself. 
+Since you will get a repository class you can define `beforeSave` and `afterSave` methods in the class itself.
 
-DO NOT CONFUSE THESE FUNCTION WITH LARAVEL'S MODEL EVENTS.
+Example:
+
+```
+// in \App\Repositories\UserRepository
+
+protected function beforeSave($fields)
+{
+    if (array_key_exists('password', $fields)){
+        $fields['password'] = Hash::make($fields['password']);
+    }
+    if (array_key_exists('role', $fields)){
+        unset($fields['role']);
+    }
+}
+```
+
+`afterSave()` method receives 2 values:
+
+`$original_fields`: These are the fields that were actually inserted.
+
+`$fields`: These are the fields changed by `beforeSave()` method.
+
+If `beforeSave` method is not defined then both `$original_fields` and `$fields` will be same.
+
+```
+protected function afterSave($original_fields, $fields)
+{
+    $role = RoleRepository::init()
+            ->persist(false)
+            ->create([
+                'role' => $original_fields['role']
+            ]);
+            
+    $this->model->role()->save($role);        
+}
+
+```
+
+# Contribution
+
+PRs are welcome.

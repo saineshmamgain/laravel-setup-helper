@@ -132,9 +132,14 @@ abstract class BaseRepository
      * @param bool $persist
      *
      * @return $this
+     * @throws RepositoryException
      */
-    public function persist($persist)
+    public function persist($persist = true)
     {
+        if (!is_bool($persist)){
+            throw new RepositoryException('Persist expects parameter to be bool ' . gettype($persist) . 'provided');
+        }
+
         $this->persist = $persist;
 
         return $this;
@@ -144,9 +149,13 @@ abstract class BaseRepository
      * @param bool $refresh
      *
      * @return $this
+     * @throws RepositoryException
      */
-    public function refresh($refresh)
+    public function refresh($refresh = true)
     {
+        if (!is_bool($refresh)){
+            throw new RepositoryException('Refresh expects parameter to be bool ' . gettype($refresh) . 'provided');
+        }
         $this->refresh = $refresh;
 
         return $this;
