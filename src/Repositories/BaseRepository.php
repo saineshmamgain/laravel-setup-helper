@@ -164,9 +164,9 @@ abstract class BaseRepository
     /**
      * @param array|callable $rows
      *
+     * @throws RepositoryException
      *
      * @return array
-     * @throws RepositoryException
      */
     public function createMany($rows)
     {
