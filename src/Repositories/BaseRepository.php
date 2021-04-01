@@ -2,6 +2,7 @@
 
 namespace SaineshMamgain\SetupHelper\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use SaineshMamgain\SetupHelper\Exceptions\RepositoryException;
 
@@ -154,9 +155,9 @@ abstract class BaseRepository
     /**
      * @param array|callable $rows
      *
-     * @throws RepositoryException
      *
      * @return array
+     * @throws RepositoryException
      */
     public function createMany($rows)
     {
@@ -165,7 +166,7 @@ abstract class BaseRepository
         }
         $saved = [];
         foreach ($rows as $fields) {
-            $saved[] = static::make()
+            $saved[] = static::init()
                 ->create($fields);
         }
 
@@ -247,5 +248,13 @@ abstract class BaseRepository
     protected function afterRestore()
     {
         return $this->model;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function query()
+    {
+        return $this->model->newQuery();
     }
 }
