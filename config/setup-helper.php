@@ -14,4 +14,6 @@ return [
 
     'allow_make_repository_command' => true,
 
+    'allow_make_job_command' => true,
+
 ];

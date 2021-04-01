@@ -57,6 +57,18 @@ class SetupCommand extends Command {
             ]);
         }
 
+        if (config('setup-helper.allow_make_job_command')){
+
+            if (! is_dir($jobsPath = $this->laravel->basePath('app/Jobs'))){
+                (new Filesystem)->makeDirectory($jobsPath);
+            }
+
+            $files = array_merge($files, [
+                realpath(__DIR__ . '/../../../stubs/setup-helper-job.stub') => $stubsPath . '/setup-helper-job.stub',
+                realpath(__DIR__ . '/../../../stubs/setup-helper-base-job.stub') => $jobsPath . '/BaseJob.php',
+            ]);
+        }
+
         if (config('setup-helper.allow_make_repository_command')){
             if (! is_dir($repositoryPath = $this->laravel->basePath('app/Repositories'))){
                 (new Filesystem)->makeDirectory($repositoryPath);

@@ -5,6 +5,7 @@ namespace SaineshMamgain\SetupHelper;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\ContractMakeCommand;
+use SaineshMamgain\SetupHelper\Console\Commands\Generators\JobMakeCommand;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\RepositoryMakeCommand;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\RequestMakeCommand;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\TraitMakeCommand;
@@ -54,6 +55,12 @@ class SetupHelperServiceProvider extends ServiceProvider
             if (config('setup-helper.allow_make_request_command')) {
                 $this->app->extend('command.request.make', function () {
                     return new RequestMakeCommand(new Filesystem());
+                });
+            }
+
+            if (config('setup-helper.allow_make_job_command')) {
+                $this->app->extend('command.job.make', function () {
+                    return new JobMakeCommand(new Filesystem());
                 });
             }
         }
