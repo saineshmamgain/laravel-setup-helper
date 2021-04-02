@@ -29,6 +29,8 @@ abstract class BaseRequest extends FormRequest
     public function rules()
     {
         switch (strtolower($this->method())) {
+            case 'get':
+                return $this->getMethodRules();
             case 'post':
                 return $this->postMethodRules();
             case 'put':

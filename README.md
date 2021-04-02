@@ -56,6 +56,8 @@ To make this more smooth this package Provides `BaseRequest` class.
 
 When installation is complete, the request files created by `php artisan make:request` command will extend this `BaseRequest` class.
 
+`getMethodRules()` To apply rules only on `GET` requests
+
 `postMethodRules()` To apply rules only on `POST` requests
 
 `putMethodRules()` To apply rules only on `PUT` requests
