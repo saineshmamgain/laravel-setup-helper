@@ -14,11 +14,9 @@ Publish the config
 
 The config has following switches:
 
-`allow_request_make_command`
+`override_request_make_command`
 
-`allow_repository_make_command`
-
-`allow_make_job_command`
+`override_make_job_command`
 
 Set to false if you don't want these functionalities.
 
