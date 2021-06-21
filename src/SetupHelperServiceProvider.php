@@ -6,7 +6,6 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\ContractMakeCommand;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\JobMakeCommand;
-use SaineshMamgain\SetupHelper\Console\Commands\Generators\RepositoryMakeCommand;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\RequestMakeCommand;
 use SaineshMamgain\SetupHelper\Console\Commands\Generators\TraitMakeCommand;
 use SaineshMamgain\SetupHelper\Console\Commands\SetupCommand;
