@@ -10,10 +10,8 @@
 
 return [
 
-    'allow_make_request_command' => true,
+    'override_make_request_command' => true,
 
-    'allow_make_repository_command' => true,
-
-    'allow_make_job_command' => true,
+    'override_make_job_command' => true,
 
 ];

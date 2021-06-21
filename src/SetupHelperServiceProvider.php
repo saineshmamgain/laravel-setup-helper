@@ -44,21 +44,15 @@ class SetupHelperServiceProvider extends ServiceProvider
                 'command.setup-helper.make.contract',
             ];
 
-            if (config('setup-helper.allow_make_repository_command')) {
-                $this->app->bind('command.setup-helper.make.repository', RepositoryMakeCommand::class);
-
-                $commands = array_merge($commands, ['command.setup-helper.make.repository']);
-            }
-
             $this->commands($commands);
 
-            if (config('setup-helper.allow_make_request_command')) {
+            if (config('setup-helper.override_make_request_command')) {
                 $this->app->extend('command.request.make', function () {
                     return new RequestMakeCommand(new Filesystem());
                 });
             }
 
-            if (config('setup-helper.allow_make_job_command')) {
+            if (config('setup-helper.override_make_job_command')) {
                 $this->app->extend('command.job.make', function () {
                     return new JobMakeCommand(new Filesystem());
                 });
