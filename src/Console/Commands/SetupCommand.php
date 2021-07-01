@@ -44,7 +44,7 @@ class SetupCommand extends Command
             realpath(__DIR__.'/../../../stubs/setup-helper-contract.stub') => $stubsPath.'/setup-helper-contract.stub',
         ];
 
-        if (config('setup-helper.allow_make_request_command')) {
+        if (config('setup-helper.override_make_request_command')) {
             if (!is_dir($requestsPath = $this->laravel->basePath('app/Http/Requests'))) {
                 (new Filesystem())->makeDirectory($requestsPath);
             }
@@ -55,7 +55,7 @@ class SetupCommand extends Command
             ]);
         }
 
-        if (config('setup-helper.allow_make_job_command')) {
+        if (config('setup-helper.override_make_job_command')) {
             if (!is_dir($jobsPath = $this->laravel->basePath('app/Jobs'))) {
                 (new Filesystem())->makeDirectory($jobsPath);
             }
@@ -63,22 +63,6 @@ class SetupCommand extends Command
             $files = array_merge($files, [
                 realpath(__DIR__.'/../../../stubs/setup-helper-job.stub')      => $stubsPath.'/setup-helper-job.stub',
                 realpath(__DIR__.'/../../../stubs/setup-helper-base-job.stub') => $jobsPath.'/BaseJob.php',
-            ]);
-        }
-
-        if (config('setup-helper.allow_make_repository_command')) {
-            if (!is_dir($repositoryPath = $this->laravel->basePath('app/Repositories'))) {
-                (new Filesystem())->makeDirectory($repositoryPath);
-            }
-
-            if (!is_dir($exceptionPath = $this->laravel->basePath('app/Exceptions'))) {
-                (new Filesystem())->makeDirectory($exceptionPath);
-            }
-
-            $files = array_merge($files, [
-                realpath(__DIR__.'/../../../stubs/setup-helper-repository.stub')           => $stubsPath.'/setup-helper-repository.stub',
-                realpath(__DIR__.'/../../../stubs/setup-helper-base-repository.stub')      => $repositoryPath.'/BaseRepository.php',
-                realpath(__DIR__.'/../../../stubs/setup-helper-repository-exception.stub') => $exceptionPath.'/RepositoryException.php',
             ]);
         }
 
